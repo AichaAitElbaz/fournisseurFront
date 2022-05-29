@@ -1,0 +1,19 @@
+table {
+  width: 60%;
+  margin-left: 350px;
+  margin-top: 80px;
+}
+.first{
+  width: 700px;
+
+}
+.second{
+  width: 140px;
+}
+.td1{
+  height: 60px;
+}
+
+.table{
+  background: beige;
+}

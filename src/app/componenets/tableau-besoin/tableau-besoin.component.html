@@ -1,0 +1,35 @@
+<table class="table table-striped"   *ngFor="let e of expressionBesoinsItems; index as i">
+  <thead>
+  <tr>
+    <th scope="col">Designations</th>
+    <th scope="col">Quantite</th>
+    <th scope="col">PU</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      {{ e.produit.libelle }}
+    </td>
+    <td>{{ e.quantite }}</td>
+    <td><input [(ngModel)]="e.pu"></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>MT HT</td>
+    <td>MT TVA</td>
+    <td>MT TTC</td>
+  </tr>
+  <tr>
+    <td>MT TTC</td>
+    <td></td>
+    <td></td>
+  </tr>
+  </tbody>
+  <tfoot>
+<!--  <button mat-flat-button color="warn" >Done</button>-->
+  <button mat-flat-button color="warn" (click)="saveItem(e)">Done</button>
+  </tfoot>
+</table>
+
