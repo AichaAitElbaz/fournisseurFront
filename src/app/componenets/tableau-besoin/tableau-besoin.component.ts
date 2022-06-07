@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ExpressionBesoinService} from "../../controller/service/expression-besoin.service";
 import {ExpressionBesoinItem} from "../../controller/model/expression-besoin-item.model";
 import {HttpClient} from "@angular/common/http";
+import {TableauBesoinItem} from "../../controller/model/tableau-besoin-item.model";
+import {TableauBesoinService} from "../../controller/service/tableau-besoin.service";
+import {TableauBesoinItem1} from "../../controller/model/tableau-besoin-item1.model";
 
 export interface PeriodicElement {
   name: string;
@@ -20,22 +22,26 @@ export interface PeriodicElement {
 export class TableauBesoinComponent implements OnInit {
  dataSource:Array<ExpressionBesoinItem>
 
-  constructor(private expressionBesoinService: ExpressionBesoinService,private http:HttpClient) {
+  constructor(private http:HttpClient,private tableauBesoinService:TableauBesoinService) {
   }
 
-  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
   ngOnInit(): void {
- this.expressionBesoinService.getItems()
- //    this.dataSource=this.expressionBesoinsItems;
-  }
-  displayedColumns: ExpressionBesoinItem[] ;
-  get expressionBesoinsItems(): Array<ExpressionBesoinItem> {
-    return this.expressionBesoinService.expressionBesoinsItems;
+   this.tableauBesoinService.getTableauBesoinItem()
   }
 
-
-  saveItem(expressionBesoinItem:ExpressionBesoinItem) {
-    this.expressionBesoinService.saveItem(expressionBesoinItem)
+  get tableauBesoinItem1(): TableauBesoinItem1 {
+    return this.tableauBesoinService.tableauBesoinItem1;
   }
+
+  get tableauBesoinItem(): TableauBesoinItem {
+    return this.tableauBesoinService.tableauBesoinItem;
+  }
+  saveTableauBesoinItem(tableauBesoinItem:TableauBesoinItem){
+   this.tableauBesoinService.saveTableauBesoinItem(tableauBesoinItem)
+  }
+  saveTableauBesoinItem1(){
+   this.tableauBesoinService.saveTableauBesoinItem1()
+  }
+
 }
