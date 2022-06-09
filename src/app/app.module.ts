@@ -8,12 +8,15 @@ import {MatTableModule} from "@angular/material/table";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
+import {AppRoutingModule} from "./app-routing.module";
+import {DataComponent} from "./componenets/data/data.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuBarComponent,
     TableauBesoinComponent,
+    DataComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,6 +24,7 @@ import {FormsModule} from "@angular/forms";
     HttpClientModule,
     MatButtonModule,
     FormsModule,
+    AppRoutingModule,
 
   ],
   providers: [],
