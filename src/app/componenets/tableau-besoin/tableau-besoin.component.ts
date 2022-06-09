@@ -30,18 +30,12 @@ export class TableauBesoinComponent implements OnInit {
    this.tableauBesoinService.getTableauBesoinItem()
   }
 
-  get tableauBesoinItem1(): TableauBesoinItem1 {
-    return this.tableauBesoinService.tableauBesoinItem1;
-  }
 
   get tableauBesoinItem(): TableauBesoinItem {
     return this.tableauBesoinService.tableauBesoinItem;
   }
   saveTableauBesoinItem(tableauBesoinItem:TableauBesoinItem){
    this.tableauBesoinService.saveTableauBesoinItem(tableauBesoinItem)
-  }
-  saveTableauBesoinItem1(){
-   this.tableauBesoinService.saveTableauBesoinItem1()
   }
 
 }

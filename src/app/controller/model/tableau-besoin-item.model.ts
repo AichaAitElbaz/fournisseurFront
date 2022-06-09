@@ -6,6 +6,7 @@ export class TableauBesoinItem {
   public fournisseur:Fournisseur;
   public tableauBesoin=new TableauBesoin();
   public reference:string;
+  public statut:string;
   public tva:number;
   public ttc:number;
   public ht:number;

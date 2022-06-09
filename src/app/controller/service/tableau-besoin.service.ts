@@ -10,7 +10,7 @@ import {TableauBesoinItem1} from "../model/tableau-besoin-item1.model";
 export class TableauBesoinService {
   // private _tableauBesoin =new TableauBesoin();
   private _tableauBesoinItem=new TableauBesoinItem();
-  private _tableauBesoinItem1=new TableauBesoinItem1();
+  // private _tableauBesoinItem1=new TableauBesoinItem1();
 
   constructor(private http: HttpClient) {
   }
@@ -24,13 +24,13 @@ export class TableauBesoinService {
     this._tableauBesoinItem = value;
   }
 
-  get tableauBesoinItem1(): TableauBesoinItem1 {
-    return this._tableauBesoinItem1;
-  }
-
-  set tableauBesoinItem1(value: TableauBesoinItem1) {
-    this._tableauBesoinItem1 = value;
-  }
+  // get tableauBesoinItem1(): TableauBesoinItem1 {
+  //   return this._tableauBesoinItem1;
+  // }
+  //
+  // set tableauBesoinItem1(value: TableauBesoinItem1) {
+  //   this._tableauBesoinItem1 = value;
+  // }
 
 // get tableauBesoin(): TableauBesoin {
   //   return this._tableauBesoin;
@@ -49,33 +49,28 @@ export class TableauBesoinService {
   //   )
   // }
   getTableauBesoinItem() {
-
-    this.http.get<TableauBesoinItem>("http://localhost:8098/v1/admin/tableau-besoin-item/reference/tab2").subscribe(
+    this.http.get<TableauBesoinItem>("http://localhost:8096/v1/admin/tableau-besoin-item/reference/tab2").subscribe(
       data => {
         this.tableauBesoinItem = data;
-        console.log(this.tableauBesoinItem.tableauBesoin.expressionBesoinItems)
+        console.log(data)
+        console.log(this.tableauBesoinItem)
       }
     )
   }
 
-  saveTableauBesoinItem1(){
-    this.http.post("http://localhost:8098/v1/admin/tableau-besoin-item1/",this.tableauBesoinItem1).subscribe(
-      data=>{
-        console.log("hello world")
-      }
-    )
 
-  }
 
   saveTableauBesoinItem(tableauBesoinItem:TableauBesoinItem){
     let ht=0;
     tableauBesoinItem.tva=tableauBesoinItem.tableauBesoin.tva;
     tableauBesoinItem.tableauBesoin.expressionBesoinItems.forEach(e=>{
+      e.pt=e.pu*e.quantite;
       ht+=e.pu*e.quantite;
     })
     tableauBesoinItem.ht=ht;
     tableauBesoinItem.ttc=tableauBesoinItem.tva*ht;
-    this.http.post("http://localhost:8098/v1/admin/tableau-besoin-item/",tableauBesoinItem).subscribe(
+    tableauBesoinItem.statut="reponse"
+    this.http.post("http://localhost:8096/v1/admin/tableau-besoin-item/",tableauBesoinItem).subscribe(
       data=>{
         console.log("hello aicha")
         console.log(tableauBesoinItem)

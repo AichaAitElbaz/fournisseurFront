@@ -8,12 +8,14 @@ import {MatTableModule} from "@angular/material/table";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
+import { BonCmdComponent } from './components/bon-cmd/bon-cmd.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuBarComponent,
     TableauBesoinComponent,
+    BonCmdComponent,
   ],
   imports: [
     BrowserModule,
