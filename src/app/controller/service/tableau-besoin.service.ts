@@ -11,6 +11,7 @@ export class TableauBesoinService {
   // private _tableauBesoin =new TableauBesoin();
   private _tableauBesoinItem=new TableauBesoinItem();
   private _tableauBesoinItem1=new TableauBesoinItem1();
+  private _tous_les_tables:TableauBesoinItem[];
 
   constructor(private http: HttpClient) {
   }
@@ -48,20 +49,35 @@ export class TableauBesoinService {
   //     }
   //   )
   // }
-  getTableauBesoinItem() {
+  /*getTableauBesoinItem() {
 
-    this.http.get<TableauBesoinItem>("http://localhost:8098/v1/admin/tableau-besoin-item/reference/tab2").subscribe(
+    this.http.get<TableauBesoinItem>("http://localhost:8096/v1/admin/tableau-besoin-item/reference/tab1").subscribe(
       data => {
         this.tableauBesoinItem = data;
         console.log(this.tableauBesoinItem.tableauBesoin.expressionBesoinItems)
       }
     )
+  }*/
+  getTableauBesoinItem(reference) {
+
+    this.http.get<TableauBesoinItem>("http://localhost:8096/v1/admin/tableau-besoin-item/reference/"+reference).subscribe(
+      data => {
+        this.tableauBesoinItem = data;
+        //console.log(this.tableauBesoinItem.tableauBesoin.expressionBesoinItems)
+      }
+    )
+  }  getAllTableauBesoinItem() {
+    this.http.get<TableauBesoinItem[]>("http://localhost:8096/v1/admin/tableau-besoin-item/statut/en%20cours").subscribe(
+      data => {
+        this._tous_les_tables=[...data]
+        console.log(data)
+      }
+    )
   }
 
   saveTableauBesoinItem1(){
-    this.http.post("http://localhost:8098/v1/admin/tableau-besoin-item1/",this.tableauBesoinItem1).subscribe(
+    this.http.post("http://localhost:8096/v1/admin/tableau-besoin-item1/",this.tableauBesoinItem1).subscribe(
       data=>{
-        console.log("hello world")
       }
     )
 
@@ -75,7 +91,7 @@ export class TableauBesoinService {
     })
     tableauBesoinItem.ht=ht;
     tableauBesoinItem.ttc=tableauBesoinItem.tva*ht;
-    this.http.post("http://localhost:8098/v1/admin/tableau-besoin-item/",tableauBesoinItem).subscribe(
+    this.http.post("http://localhost:8096/v1/admin/tableau-besoin-item/",tableauBesoinItem).subscribe(
       data=>{
         console.log("hello aicha")
         console.log(tableauBesoinItem)

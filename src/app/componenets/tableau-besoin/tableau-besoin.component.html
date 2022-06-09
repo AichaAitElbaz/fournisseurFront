@@ -1,4 +1,4 @@
-<table class="table table-striped" >
+<table class="table table-striped">
   <thead>
   <tr>
     <th scope="col">Designations</th>
@@ -8,18 +8,23 @@
   </thead>
   <tbody>
   <tr *ngFor="let e of tableauBesoinItem.tableauBesoin.expressionBesoinItems">
-    <td >
-{{e.produit.libelle}}
+    <td>
+      {{e.produit.libelle}}
     </td>
-    <td >{{e.quantite}}</td>
-    <td ><input [(ngModel)]="e.pu"></td>
+    <td>{{e.quantite}}</td>
+    <td><input [(ngModel)]="e.pu"></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td >MT HT</td></tr>
-    <tr><td >TVA <input [(ngModel)]="tableauBesoinItem.tableauBesoin.tva"></td></tr>
-    <tr><td >MT TTC</td></tr>
+    <td>MT HT</td>
+  </tr>
+  <tr>
+    <td>TVA <input [(ngModel)]="tableauBesoinItem.tableauBesoin.tva"></td>
+  </tr>
+  <tr>
+    <td>MT TTC</td>
+  </tr>
 
   <tr>
 
@@ -28,7 +33,7 @@
   </tr>
   </tbody>
   <tfoot>
-<!--  <button mat-flat-button color="warn" >Done</button>-->
+  <!--  <button mat-flat-button color="warn" >Done</button>-->
   <button mat-flat-button color="warn" (click)="saveTableauBesoinItem(tableauBesoinItem)">Done</button>
   </tfoot>
 </table>
