@@ -10,6 +10,8 @@ import {TableauBesoinItem1} from "../model/tableau-besoin-item1.model";
 export class TableauBesoinService {
   // private _tableauBesoin =new TableauBesoin();
   private _tableauBesoinItem=new TableauBesoinItem();
+  private _tableauBesoinItem1=new TableauBesoinItem1();
+  private _tous_les_tables:TableauBesoinItem[];
   // private _tableauBesoinItem1=new TableauBesoinItem1();
 
   constructor(private http: HttpClient) {
@@ -56,9 +58,31 @@ export class TableauBesoinService {
         console.log(this.tableauBesoinItem)
       }
     )
+  }*/
+  getTableauBesoinItem(reference) {
+
+    this.http.get<TableauBesoinItem>("http://localhost:8096/v1/admin/tableau-besoin-item/reference/"+reference).subscribe(
+      data => {
+        this.tableauBesoinItem = data;
+        //console.log(this.tableauBesoinItem.tableauBesoin.expressionBesoinItems)
+      }
+    )
+  }  getAllTableauBesoinItem() {
+    this.http.get<TableauBesoinItem[]>("http://localhost:8096/v1/admin/tableau-besoin-item/statut/en%20cours").subscribe(
+      data => {
+        this._tous_les_tables=[...data]
+        console.log(data)
+      }
+    )
   }
 
+  saveTableauBesoinItem1(){
+    this.http.post("http://localhost:8096/v1/admin/tableau-besoin-item1/",this.tableauBesoinItem1).subscribe(
+      data=>{
+      }
+    )
 
+  }
 
   saveTableauBesoinItem(tableauBesoinItem:TableauBesoinItem){
     let ht=0;

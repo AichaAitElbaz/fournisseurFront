@@ -8,6 +8,8 @@ import {MatTableModule} from "@angular/material/table";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
+import {AppRoutingModule} from "./app-routing.module";
+import {DataComponent} from "./componenets/data/data.component";
 import { BonCmdComponent } from './components/bon-cmd/bon-cmd.component';
 
 @NgModule({
@@ -16,6 +18,8 @@ import { BonCmdComponent } from './components/bon-cmd/bon-cmd.component';
     MenuBarComponent,
     TableauBesoinComponent,
     BonCmdComponent,
+    DataComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -23,6 +27,7 @@ import { BonCmdComponent } from './components/bon-cmd/bon-cmd.component';
     HttpClientModule,
     MatButtonModule,
     FormsModule,
+    AppRoutingModule,
 
   ],
   providers: [],

@@ -9,7 +9,7 @@
   <tbody>
   <tr *ngFor="let e of tableauBesoinItem.tableauBesoin.expressionBesoinItems">
     <td >
-{{e.libelle}}
+{{e.produit.libelle}}
     </td>
     <td >{{e.quantite}}</td>
     <td ><input [(ngModel)]="e.pu"></td>
