@@ -29,7 +29,7 @@ export class TableauBesoinComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+this.tableauBesoinService.getTableauBesoinItem(this.reference)
     this.tableauBesoinService.getAllTableauBesoinItem();
     this.activatedRoute.params.subscribe(params => {
       console.log(params['reference'])
@@ -43,7 +43,7 @@ export class TableauBesoinComponent implements OnInit {
     });
 
     this.tableauBesoinService.getTableauBesoinItem(this.reference);
-
+// this.tableauBesoinService.getTableauBesoinItem();
   }
 
 
