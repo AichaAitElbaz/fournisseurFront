@@ -3,6 +3,7 @@ import {TableauBesoinItem} from "../model/tableau-besoin-item.model";
 import {TableauBesoin} from "../model/tableau-besoin.model";
 import {HttpClient} from "@angular/common/http";
 import {TableauBesoinItem1} from "../model/tableau-besoin-item1.model";
+import {Fournisseur} from "../model/fournisseur.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class TableauBesoinService {
   private _tableauBesoinItem=new TableauBesoinItem();
   private _tableauBesoinItem1=new TableauBesoinItem1();
   private _tous_les_tables:TableauBesoinItem[];
+  private _fournisseur=new Fournisseur();
 
   constructor(private http: HttpClient) {
   }
@@ -98,5 +100,18 @@ export class TableauBesoinService {
       }
     )
 
+  }
+
+
+  get fournisseur(): Fournisseur {
+    return this._fournisseur;
+  }
+
+  set fournisseur(value: Fournisseur) {
+    this._fournisseur = value;
+  }
+
+  public updateRib(){
+    return this.http.put("http://localhost:8096/v1/admin/fournisseur/rib",this.fournisseur);
   }
 }
