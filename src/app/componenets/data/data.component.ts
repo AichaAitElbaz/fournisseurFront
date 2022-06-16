@@ -38,4 +38,9 @@ export class DataComponent implements OnInit {
     })
 
 }
+public updateRib(){
+    return this.tableauBesoinService.updateRib().subscribe(
+
+    )
+}
 }

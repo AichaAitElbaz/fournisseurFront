@@ -13,9 +13,12 @@ import {DataComponent} from "./componenets/data/data.component";
 const routes: Routes = [
 
 
-  {path: 's/:id', component: DataComponent},
-  {path: ':reference', component: TableauBesoinComponent},
+  // {path: 's/:id', component: DataComponent},
+  // {path: ':reference', component: TableauBesoinComponent},
   // {path: '', component: TableauBesoinComponent},
+  {path: '', component: DataComponent},
+  {path: 'reference/:reference', component: TableauBesoinComponent},
+  {path: 'data/:reference', component: DataComponent},
 ];
 
 @NgModule({

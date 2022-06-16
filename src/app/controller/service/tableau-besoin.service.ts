@@ -3,15 +3,17 @@ import {TableauBesoinItem} from "../model/tableau-besoin-item.model";
 import {TableauBesoin} from "../model/tableau-besoin.model";
 import {HttpClient} from "@angular/common/http";
 import {TableauBesoinItem1} from "../model/tableau-besoin-item1.model";
+import {Fournisseur} from "../model/fournisseur.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TableauBesoinService {
   // private _tableauBesoin =new TableauBesoin();
-  private _tableauBesoinItem = new TableauBesoinItem();
-  private _tableauBesoinItem1 = new TableauBesoinItem1();
-  private _tous_les_tables: TableauBesoinItem[];
+  private _tableauBesoinItem=new TableauBesoinItem();
+  private _tableauBesoinItem1=new TableauBesoinItem1();
+  private _tous_les_tables:TableauBesoinItem[];
+  private _fournisseur=new Fournisseur();
 
   constructor(private http: HttpClient) {
   }
@@ -49,55 +51,67 @@ export class TableauBesoinService {
   //     }
   //   )
   // }
+  /*getTableauBesoinItem() {
 
-  getTableauBesoinItem(reference:string) {
+    this.http.get<TableauBesoinItem>("http://localhost:8096/v1/admin/tableau-besoin-item/reference/tab1").subscribe(
+      data => {
+        this.tableauBesoinItem = data;
+        console.log(this.tableauBesoinItem.tableauBesoin.expressionBesoinItems)
+      }
+    )
+  }*/
+  getTableauBesoinItem(reference) {
 
     this.http.get<TableauBesoinItem>("http://localhost:8096/v1/admin/tableau-besoin-item/reference/"+reference).subscribe(
       data => {
         this.tableauBesoinItem = data;
-        console.log(this.tableauBesoinItem)
+        //console.log(this.tableauBesoinItem.tableauBesoin.expressionBesoinItems)
       }
     )
-  }
-
-  getAllTableauBesoinItem() {
+  }  getAllTableauBesoinItem() {
     this.http.get<TableauBesoinItem[]>("http://localhost:8096/v1/admin/tableau-besoin-item/statut/en%20cours").subscribe(
       data => {
-        this._tous_les_tables = [...data]
+        this._tous_les_tables=[...data]
         console.log(data)
       }
     )
   }
 
-  saveTableauBesoinItem1() {
-    this.http.post("http://localhost:8096/v1/admin/tableau-besoin-item1/", this.tableauBesoinItem1).subscribe(
-      data => {
+  saveTableauBesoinItem1(){
+    this.http.post("http://localhost:8096/v1/admin/tableau-besoin-item1/",this.tableauBesoinItem1).subscribe(
+      data=>{
       }
     )
 
   }
 
-  saveTableauBesoinItem(tableauBesoinItem: TableauBesoinItem) {
-    let ht = 0;
-    tableauBesoinItem.tva = tableauBesoinItem.tableauBesoin.tva;
-    tableauBesoinItem.tableauBesoin.expressionBesoinItems.forEach(e => {
-      e.pt = e.pu * e.quantite;
-      ht += e.pu * e.quantite;
-      this.http.put("http://localhost:8096/v1/admin/expression-besoin-item/",e).subscribe(
-        data=>{
-          console.log(e)
-        }
-      )
+  saveTableauBesoinItem(tableauBesoinItem:TableauBesoinItem){
+    let ht=0;
+    tableauBesoinItem.tva=tableauBesoinItem.tableauBesoin.tva;
+    tableauBesoinItem.tableauBesoin.expressionBesoinItems.forEach(e=>{
+      ht+=e.pu*e.quantite;
     })
-    tableauBesoinItem.ht = ht;
-    tableauBesoinItem.ttc = tableauBesoinItem.tva * ht;
-    tableauBesoinItem.statut = "reponse"
-    this.http.post("http://localhost:8096/v1/admin/tableau-besoin-item/", tableauBesoinItem).subscribe(
-      data => {
+    tableauBesoinItem.ht=ht;
+    tableauBesoinItem.ttc=tableauBesoinItem.tva*ht;
+    this.http.post("http://localhost:8096/v1/admin/tableau-besoin-item/",tableauBesoinItem).subscribe(
+      data=>{
         console.log("hello aicha")
         console.log(tableauBesoinItem)
       }
     )
 
+  }
+
+
+  get fournisseur(): Fournisseur {
+    return this._fournisseur;
+  }
+
+  set fournisseur(value: Fournisseur) {
+    this._fournisseur = value;
+  }
+
+  public updateRib(){
+    return this.http.put("http://localhost:8096/v1/admin/fournisseur/rib",this.fournisseur);
   }
 }
