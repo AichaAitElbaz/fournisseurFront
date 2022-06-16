@@ -15,7 +15,7 @@ const routes: Routes = [
 
   {path: '', component: DataComponent},
   {path: 'reference/:reference', component: TableauBesoinComponent},
-  {path: 'data/:reference', component: DataComponent},
+  {path: 'data/:datareference', component: DataComponent},
 ];
 
 @NgModule({

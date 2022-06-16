@@ -3,6 +3,7 @@ import {ExpressionBesoinItem} from "../../controller/model/expression-besoin-ite
 import {HttpClient} from "@angular/common/http";
 import {TableauBesoinService} from "../../controller/service/tableau-besoin.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {Fournisseur} from "../../controller/model/fournisseur.model";
 
 @Component({
   selector: 'app-data',
@@ -11,14 +12,18 @@ import {ActivatedRoute, Params} from "@angular/router";
 })
 export class DataComponent implements OnInit {
   reference: string;
+  fournisseurreference: string;
   id: number;
   dataSource: Array<ExpressionBesoinItem>
   constructor(private http: HttpClient, private tableauBesoinService: TableauBesoinService, private activatedRoute:ActivatedRoute) {
   }
 
+
+  get fournisseur(): Fournisseur {
+    return this.tableauBesoinService.fournisseur;
+  }
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params['id'];
-    console.log(this.id);
 
     this.tableauBesoinService.getAllTableauBesoinItem();
     // this.activatedRoute.params.subscribe(params => {
@@ -34,13 +39,29 @@ export class DataComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
       this.reference = params['reference'];
-      console.log("this is "+this.reference)
-    })
+    });
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.fournisseurreference = params['datareference'];
+    });
+    this.getFournisseurByreference(this.fournisseurreference);
 
-}
-public updateRib(){
-    return this.tableauBesoinService.updateRib().subscribe(
 
-    )
-}
+  }
+  get foundedfournisseur(): Fournisseur {
+    return this.tableauBesoinService.foundedfournisseur;
+  }
+
+  public updateRib(){
+    console.log(this.foundedfournisseur.rib)
+    return this.http.put("http://localhost:8096/v1/admin/fournisseur/rib",this.foundedfournisseur).subscribe(
+      data=>{
+        console.log(this.foundedfournisseur.rib)
+      }
+    );
+  }
+
+  public getFournisseurByreference(refrence:string){
+    this.tableauBesoinService.getFournisseur(refrence);
+  }
+
 }

@@ -8,20 +8,20 @@
         <dt class="inputbox-title">Votre nom</dt>
         <dd class="inputbox-content">
           <input id="input0" type="text" required />
-          <label for="input0">nom</label>
+          <label for="input0">{{foundedfournisseur.nomFournisseur}}</label>
           <span class="underline"></span>
         </dd>
       </dl>
       <dl class="inputbox">
         <dt class="inputbox-title">votre Rib</dt>
         <dd class="inputbox-content">
-          <input id="input1" type="text" required />
-          <label for="input1"> rib</label>
+          <input id="input1" type="text" required  [(ngModel)]="foundedfournisseur.rib" />
+          <label for="input1" >ex:1236524875625445</label>
           <span class="underline"></span>
         </dd>
       </dl>
       <div class="btns">
-        <button class="btn btn-confirm">envoyer</button>
+        <button class="btn btn-confirm"  (click)="updateRib()">envoyer</button>
         <button class="btn btn-cancel">annuler</button>
       </div>
     </div>
