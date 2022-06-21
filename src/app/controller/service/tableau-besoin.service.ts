@@ -93,10 +93,15 @@ export class TableauBesoinService {
     })
     tableauBesoinItem.ht=ht;
     tableauBesoinItem.ttc=tableauBesoinItem.tva*ht;
+    tableauBesoinItem.statut="reponse"
     this.http.post("http://localhost:8096/v1/admin/tableau-besoin-item/",tableauBesoinItem).subscribe(
       data=>{
-        console.log("hello aicha")
-        console.log(tableauBesoinItem)
+        tableauBesoinItem.tableauBesoin.expressionBesoinItems.forEach(e=>{
+          e.statut='reponse'
+          this.http.put("http://localhost:8096/v1/admin/expression-besoin-item/",e).subscribe(
+
+          )
+        })
       }
     )
 

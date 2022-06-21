@@ -5,6 +5,7 @@ export class ExpressionBesoinItem {
   public id: number;
   public ref: string;
   public libelle: string;
+  public statut: string;
   public quantite: number;
   public date: string;
   public expressionBesoin: ExpressionBesoin;
