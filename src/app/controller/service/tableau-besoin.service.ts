@@ -14,10 +14,19 @@ export class TableauBesoinService {
   private _tableauBesoinItem1=new TableauBesoinItem1();
   private _tous_les_tables:TableauBesoinItem[];
   private _fournisseur=new Fournisseur();
+  private _foundedfournisseur=new Fournisseur();
 
   constructor(private http: HttpClient) {
   }
 
+
+  get foundedfournisseur(): Fournisseur {
+    return this._foundedfournisseur;
+  }
+
+  set foundedfournisseur(value: Fournisseur) {
+    this._foundedfournisseur = value;
+  }
 
   get tableauBesoinItem(): TableauBesoinItem {
     return this._tableauBesoinItem;
@@ -116,7 +125,13 @@ export class TableauBesoinService {
     this._fournisseur = value;
   }
 
-  public updateRib(){
-    return this.http.put("http://localhost:8096/v1/admin/fournisseur/rib",this.fournisseur);
+  public getFournisseur(reference:string){
+   return  this.http.get<Fournisseur>("http://localhost:8096/v1/admin/fournisseur/reference/"+reference).subscribe(
+     data=>{
+       this.foundedfournisseur=data;
+       console.log(this.foundedfournisseur)
+     }
+   );
   }
+
 }
